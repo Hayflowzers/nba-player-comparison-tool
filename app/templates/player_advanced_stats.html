@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Advanced Stats</title>
+</head>
+<body>
+    <h1>Player Advanced Stats</h1>
+    {% if stats %}
+        <p>Player: {{ stats.iloc[0]['player_name'] }}</p>
+        <p>Player Efficiency Rating (PER): {{ stats.iloc[0]['per'] }}</p>
+        <p>True Shooting Percentage (TS%): {{ stats.iloc[0]['ts_percentage'] }}</p>
+        <p>Usage Rate (USG%): {{ stats.iloc[0]['usg_percentage'] }}</p>
+        <p>Win Shares (WS): {{ stats.iloc[0]['win_shares'] }}</p>
+    {% else %}
+        <p>No data available for the specified player.</p>
+    {% endif %}
+    <a href="/">Back to Home</a>
+</body>
+</html>

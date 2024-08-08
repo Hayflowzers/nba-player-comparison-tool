@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Basic Stats</title>
+</head>
+<body>
+    <h1>Compare Basic Stats</h1>
+    <h2>Player 1: {{ stats1.iloc[0]['player_name'] }}</h2>
+    <p>Points per Game: {{ stats1.iloc[0]['points_per_game'] }}</p>
+    <p>Assists per Game: {{ stats1.iloc[0]['assists_per_game'] }}</p>
+    <p>Rebounds per Game: {{ stats1.iloc[0]['rebounds_per_game'] }}</p>
+
+    <h2>Player 2: {{ stats2.iloc[0]['player_name'] }}</h2>
+    <p>Points per Game: {{ stats2.iloc[0]['points_per_game'] }}</p>
+    <p>Assists per Game: {{ stats2.iloc[0]['assists_per_game'] }}</p>
+    <p>Rebounds per Game: {{ stats2.iloc[0]['rebounds_per_game'] }}</p>
+
+    <a href="/">Back to Home</a>
+</body>
+</html>

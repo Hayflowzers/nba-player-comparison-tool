@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Basic Stats</title>
+</head>
+<body>
+    <h1>Player Basic Stats</h1>
+    {% if stats %}
+        <p>Player: {{ stats.iloc[0]['player_name'] }}</p>
+        <p>Points per Game: {{ stats.iloc[0]['points_per_game'] }}</p>
+        <p>Assists per Game: {{ stats.iloc[0]['assists_per_game'] }}</p>
+        <p>Rebounds per Game: {{ stats.iloc[0]['rebounds_per_game'] }}</p>
+    {% else %}
+        <p>No data available for the specified player.</p>
+    {% endif %}
+    <a href="/">Back to Home</a>
+</body>
+</html>
