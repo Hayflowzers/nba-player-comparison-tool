@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NBA Player Comparison</title>
+    <title>Player Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>NBA Player Comparison</h1>
-    <a href="/player">Search for Single Player</a><br>
-    <a href="/compare">Compare Two Players</a>
+    <h1>Welcome to Player Stats</h1>
+    <div>
+        <a href="{{ url_for('main.one_player') }}" class="btn">One Player</a>
+        <a href="{{ url_for('main.two_players') }}" class="btn">Two Players</a>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

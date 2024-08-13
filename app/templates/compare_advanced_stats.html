@@ -7,18 +7,21 @@
 </head>
 <body>
     <h1>Compare Advanced Stats</h1>
-    <h2>Player 1: {{ stats1.iloc[0]['player_name'] }}</h2>
-    <p>Player Efficiency Rating (PER): {{ stats1.iloc[0]['per'] }}</p>
-    <p>True Shooting Percentage (TS%): {{ stats1.iloc[0]['ts_percentage'] }}</p>
-    <p>Usage Rate (USG%): {{ stats1.iloc[0]['usg_percentage'] }}</p>
-    <p>Win Shares (WS): {{ stats1.iloc[0]['win_shares'] }}</p>
 
-    <h2>Player 2: {{ stats2.iloc[0]['player_name'] }}</h2>
-    <p>Player Efficiency Rating (PER): {{ stats2.iloc[0]['per'] }}</p>
-    <p>True Shooting Percentage (TS%): {{ stats2.iloc[0]['ts_percentage'] }}</p>
-    <p>Usage Rate (USG%): {{ stats2.iloc[0]['usg_percentage'] }}</p>
-    <p>Win Shares (WS): {{ stats2.iloc[0]['win_shares'] }}</p>
+    {% if stats %}
+        <h2>Player 1: {{ player1_name }}</h2>
+        <p>Player Efficiency Rating (PER): {{ stats[player1_name]['Player Efficiency Rating'] }}</p>
+        <p>True Shooting Percentage (TS%): {{ stats[player1_name]['True Shooting Percentage'] }}</p>
 
-    <a href="/">Back to Home</a>
+        <h2>Player 2: {{ player2_name }}</h2>
+        <p>Player Efficiency Rating (PER): {{ stats[player2_name]['Player Efficiency Rating'] }}</p>
+        <p>True Shooting Percentage (TS%): {{ stats[player2_name]['True Shooting Percentage'] }}</p>
+    {% else %}
+        <p>No data available for the specified players.</p>
+    {% endif %}
+
+    <!-- Button to search again -->
+    <a href="{{ url_for('main.two_players') }}" class="btn">Search Again</a>
+    <a href="{{ url_for('main.index') }}" class="btn">Back to Home</a>
 </body>
 </html>

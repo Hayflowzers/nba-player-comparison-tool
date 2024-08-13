@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single Player Stats</title>
+    <title>Compare Two Players</title>
 </head>
 <body>
-    <h1>Search for Player Stats</h1>
-    <form method="post">
-        <label for="player_name">Player Name:</label>
-        <input type="text" id="player_name" name="player_name" required>
-        <button type="submit">Get Stats</button>
+    <h1>Compare Two Players</h1>
+
+    <!-- Form for Basic Stats Comparison -->
+    <form action="{{ url_for('main.compare_basic_stats') }}" method="post">
+        <label for="player1_name">Enter First Player Name for Basic Stats:</label>
+        <input type="text" id="player1_name" name="player1_name" placeholder="Enter First Player Name" required>
+        <label for="player2_name">Enter Second Player Name for Basic Stats:</label>
+        <input type="text" id="player2_name" name="player2_name" placeholder="Enter Second Player Name" required>
+        <input type="submit" value="Compare Basic Stats">
     </form>
+
+    <!-- Form for Advanced Stats Comparison -->
+    <form action="{{ url_for('main.compare_advanced_stats') }}" method="post">
+        <label for="player1_name_advanced">Enter First Player Name for Advanced Stats:</label>
+        <input type="text" id="player1_name_advanced" name="player1_name" placeholder="Enter First Player Name" required>
+        <label for="player2_name_advanced">Enter Second Player Name for Advanced Stats:</label>
+        <input type="text" id="player2_name_advanced" name="player2_name" placeholder="Enter Second Player Name" required>
+        <input type="submit" value="Compare Advanced Stats">
+    </form>
+
 </body>
 </html>

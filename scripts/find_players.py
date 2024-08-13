@@ -1,6 +1,6 @@
 import re
-import json
 from nba_api.stats.library.data import players
+from nba_api.stats.endpoints import playercareerstats
 
 # Constants for player data
 player_index_id = 0
@@ -10,14 +10,6 @@ player_index_last_name = 3
 player_index_is_active = 4
 
 def _find_players(regex_pattern, row_id, players=players):
-    """
-    Find players based on a regex pattern for a specific row.
-    
-    :param regex_pattern: Regex pattern to search
-    :param row_id: Column index to search in
-    :param players: List of players to search
-    :return: List of player dictionaries
-    """
     players_found = []
     for player in players:
         if re.search(regex_pattern, str(player[row_id]), flags=re.I):
@@ -25,12 +17,6 @@ def _find_players(regex_pattern, row_id, players=players):
     return players_found
 
 def _get_player_dict(player_row):
-    """
-    Convert player data row into a dictionary.
-    
-    :param player_row: List of player data
-    :return: Dictionary with player details
-    """
     return {
         "id": player_row[player_index_id],
         "full_name": player_row[player_index_full_name],
@@ -39,31 +25,7 @@ def _get_player_dict(player_row):
         "is_active": player_row[player_index_is_active],
     }
 
-def find_players_by_first_name(regex_pattern):
-    """
-    Find players by their first name.
-    
-    :param regex_pattern: Regex pattern to search for player first names
-    :return: List of player dictionaries
-    """
-    return _find_players(regex_pattern, player_index_first_name)
-
-def save_players_to_json(players, filename='players.json'):
-    """
-    Save the list of player dictionaries to a JSON file.
-    
-    :param players: List of player dictionaries
-    :param filename: Filename for the JSON output
-    """
-    with open(filename, 'w') as f:
-        json.dump(players, f, indent=4)
-
-def normalize_name(name):
-    """Normalize name by removing extra spaces and converting to lowercase."""
-    return ' '.join(name.strip().lower().split())
-
 def find_player_id_by_name(player_name):
-    """Find player ID by matching first name, last name, or full name."""
     normalized_name = normalize_name(player_name)
     regex_pattern = re.compile(re.escape(normalized_name), re.IGNORECASE)
     
@@ -77,15 +39,52 @@ def find_player_id_by_name(player_name):
     
     return None
 
+def normalize_name(name):
+    """Normalize name by removing extra spaces and converting to lowercase."""
+    return ' '.join(name.strip().lower().split())
+
+def get_player_stats(player_id):
+    """Retrieve and display basic player stats."""
+    career = playercareerstats.PlayerCareerStats(player_id=player_id, per_mode36="PerGame")
+    career_stats = career.get_data_frames()[0]
+    
+    # Get the latest season's per-game stats
+    if not career_stats.empty:
+        latest_season_stats = career_stats.iloc[-1]  # Get the most recent season's stats
+        
+        ppg = latest_season_stats['PTS']
+        apg = latest_season_stats['AST']
+        gp = latest_season_stats['GP']
+        
+    else:
+        ppg = 0
+        apg = 0
+        gp = 0
+    
+    stats = {
+        "Games Played": gp,
+        "Points Per Game": round(ppg, 2),
+        "Assists Per Game": round(apg, 2)
+    }
+    
+    return stats
+
 def main():
-    """Main function to interact with the user."""
     player_name = input("Enter the player's first name, last name, or full name: ")
     player_id = find_player_id_by_name(player_name)
     
     if player_id:
         print(f"The ID for '{player_name}' is {player_id}.")
+        
+        # Get and display player stats
+        stats = get_player_stats(player_id)
+        print("Basic Player Stats:")
+        for key, value in stats.items():
+            print(f"{key}: {value}")
+        
     else:
         print(f"No player found with the name '{player_name}'.")
 
 if __name__ == "__main__":
     main()
+
