@@ -29,24 +29,30 @@ def get_player_stats(player_name, stats_type='basic'):
     career = playercareerstats.PlayerCareerStats(player_id=player_id)
     career_stats = career.get_data_frames()[0]
 
-    # Calculate career averages
+    # Calculate career totals and averages
     career_totals = career_stats.sum()
     total_games = career_totals['GP']
 
     if stats_type == 'basic':
         stats = {
-            'Points Per Game': career_totals['PTS'] / total_games if total_games else 0,
-            'Assists Per Game': career_totals['AST'] / total_games if total_games else 0,
-            'Rebounds Per Game': career_totals['REB'] / total_games if total_games else 0,
-            # Add other basic stats as needed
+            'GP': int(total_games),
+            'Points Per Game': round(career_totals['PTS'] / total_games, 1) if total_games else 0,
+            'Assists Per Game': round(career_totals['AST'] / total_games, 1) if total_games else 0,
+            'Rebounds Per Game': round(career_totals['REB'] / total_games, 1) if total_games else 0,
+            'Steals Per Game': round(career_totals['STL'] / total_games, 1) if total_games else 0,
+            'Blocks Per Game': round(career_totals['BLK'] / total_games, 1) if total_games else 0,
+            'Turnovers Per Game': round(career_totals['TOV'] / total_games, 1) if total_games else 0,
+            'Field Goal Percentage': round(career_totals['FGM'] / career_totals['FGA'] * 100, 1) if career_totals['FGA'] else 0,
+            'Three-Point Percentage': round(career_totals['FG3M'] / career_totals['FG3A'] * 100, 1) if career_totals['FG3A'] else 0,
+            'Free Throw Percentage': round(career_totals['FTM'] / career_totals['FTA'] * 100, 1) if career_totals['FTA'] else 0,
         }
     elif stats_type == 'advanced':
-        # Example of how advanced stats might be fetched differently
         latest_season_stats = career_stats.iloc[-1]
         stats = {
-            'Player Efficiency Rating': latest_season_stats.get('PER', 'N/A'),  # Adjust as needed
-            'True Shooting Percentage': latest_season_stats.get('TS_PCT', 'N/A'),  # Adjust as needed
-            # Add other advanced stats as needed
+            'Player Efficiency Rating': round(latest_season_stats.get('PER', 0), 1),
+            'True Shooting Percentage': round(latest_season_stats.get('TS_PCT', 0) * 100, 1),  # Assuming TS_PCT is in decimal form
+            'Box Plus/Minus': round(latest_season_stats.get('BPM', 0), 1),
+            'Value Over Replacement Player': round(latest_season_stats.get('VORP', 0), 1),
         }
     else:
         return None
@@ -81,14 +87,28 @@ def compare_players_stats(player1_name, player2_name, stats_type='basic'):
     if stats_type == 'basic':
         stats = {
             player1_name: {
-                'Points Per Game': player1_stats['PTS'] / total_games1 if total_games1 else 0,
-                'Assists Per Game': player1_stats['AST'] / total_games1 if total_games1 else 0,
-                'Rebounds Per Game': player1_stats['REB'] / total_games1 if total_games1 else 0,
+                'GP': int(total_games1),
+                'Points Per Game': round(player1_stats['PTS'] / total_games1, 1) if total_games1 else 0,
+                'Assists Per Game': round(player1_stats['AST'] / total_games1, 1) if total_games1 else 0,
+                'Rebounds Per Game': round(player1_stats['REB'] / total_games1, 1) if total_games1 else 0,
+                'Steals Per Game': round(player1_stats['STL'] / total_games1, 1) if total_games1 else 0,
+                'Blocks Per Game': round(player1_stats['BLK'] / total_games1, 1) if total_games1 else 0,
+                'Turnovers Per Game': round(player1_stats['TOV'] / total_games1, 1) if total_games1 else 0,
+                'Field Goal Percentage': round(player1_stats['FGM'] / player1_stats['FGA'] * 100, 1) if player1_stats['FGA'] else 0,
+                'Three-Point Percentage': round(player1_stats['FG3M'] / player1_stats['FG3A'] * 100, 1) if player1_stats['FG3A'] else 0,
+                'Free Throw Percentage': round(player1_stats['FTM'] / player1_stats['FTA'] * 100, 1) if player1_stats['FTA'] else 0,
             },
             player2_name: {
-                'Points Per Game': player2_stats['PTS'] / total_games2 if total_games2 else 0,
-                'Assists Per Game': player2_stats['AST'] / total_games2 if total_games2 else 0,
-                'Rebounds Per Game': player2_stats['REB'] / total_games2 if total_games2 else 0,
+                'GP': int(total_games2),
+                'Points Per Game': round(player2_stats['PTS'] / total_games2, 1) if total_games2 else 0,
+                'Assists Per Game': round(player2_stats['AST'] / total_games2, 1) if total_games2 else 0,
+                'Rebounds Per Game': round(player2_stats['REB'] / total_games2, 1) if total_games2 else 0,
+                'Steals Per Game': round(player2_stats['STL'] / total_games2, 1) if total_games2 else 0,
+                'Blocks Per Game': round(player2_stats['BLK'] / total_games2, 1) if total_games2 else 0,
+                'Turnovers Per Game': round(player2_stats['TOV'] / total_games2, 1) if total_games2 else 0,
+                'Field Goal Percentage': round(player2_stats['FGM'] / player2_stats['FGA'] * 100, 1) if player2_stats['FGA'] else 0,
+                'Three-Point Percentage': round(player2_stats['FG3M'] / player2_stats['FG3A'] * 100, 1) if player2_stats['FG3A'] else 0,
+                'Free Throw Percentage': round(player2_stats['FTM'] / player2_stats['FTA'] * 100, 1) if player2_stats['FTA'] else 0,
             }
         }
     elif stats_type == 'advanced':
@@ -96,12 +116,16 @@ def compare_players_stats(player1_name, player2_name, stats_type='basic'):
         player2_latest = player2_career.get_data_frames()[0].iloc[-1]
         stats = {
             player1_name: {
-                'Player Efficiency Rating': player1_latest.get('PER', 'N/A'),
-                'True Shooting Percentage': player1_latest.get('TS_PCT', 'N/A'),
+                'Player Efficiency Rating': round(player1_latest.get('PER', 0), 1),
+                'True Shooting Percentage': round(player1_latest.get('TS_PCT', 0) * 100, 1),  # Assuming TS_PCT is in decimal form
+                'Box Plus/Minus': round(player1_latest.get('BPM', 0), 1),
+                'Value Over Replacement Player': round(player1_latest.get('VORP', 0), 1),
             },
             player2_name: {
-                'Player Efficiency Rating': player2_latest.get('PER', 'N/A'),
-                'True Shooting Percentage': player2_latest.get('TS_PCT', 'N/A'),
+                'Player Efficiency Rating': round(player2_latest.get('PER', 0), 1),
+                'True Shooting Percentage': round(player2_latest.get('TS_PCT', 0) * 100, 1),  # Assuming TS_PCT is in decimal form
+                'Box Plus/Minus': round(player2_latest.get('BPM', 0), 1),
+                'Value Over Replacement Player': round(player2_latest.get('VORP', 0), 1),
             }
         }
     else:
