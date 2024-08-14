@@ -8,74 +8,73 @@
 </head>
 <body>
     <div class="container">
-        <div class="comparison">
-            <div class="player">
-                <h2>{{ player1_name }}</h2>
-            </div>
-            <div class="player">
-                <h2>{{ player2_name }}</h2>
-            </div>
-        </div>
-        
-        <table class="stats-table">
-            <tr>
-                <th>Overall Stats</th>
-                <th>{{ player1_name }}</th>
-                <th>{{ player2_name }}</th>
-            </tr>
-            <tr>
-                <td>Games Played (G)</td>
-                <td>{{ stats[player1_name]['GP'] }}</td>
-                <td>{{ stats[player2_name]['GP'] }}</td>
-            </tr>
-            <tr>
-                <td>Points per Game (PTS/G)</td>
-                <td>{{ stats[player1_name]['Points Per Game'] }}</td>
-                <td>{{ stats[player2_name]['Points Per Game'] }}</td>
-            </tr>
-            <tr>
-                <td>Rebounds per Game (TRB/G)</td>
-                <td>{{ stats[player1_name]['Rebounds Per Game'] }}</td>
-                <td>{{ stats[player2_name]['Rebounds Per Game'] }}</td>
-            </tr>
-            <tr>
-                <td>Assists per Game (AST/G)</td>
-                <td>{{ stats[player1_name]['Assists Per Game'] }}</td>
-                <td>{{ stats[player2_name]['Assists Per Game'] }}</td>
-            </tr>
-            <tr>
-                <td>Steals per Game (STL/G)</td>
-                <td>{{ stats[player1_name]['Steals Per Game'] }}</td>
-                <td>{{ stats[player2_name]['Steals Per Game'] }}</td>
-            </tr>
-            <tr>
-                <td>Blocks per Game (BLK/G)</td>
-                <td>{{ stats[player1_name]['Blocks Per Game'] }}</td>
-                <td>{{ stats[player2_name]['Blocks Per Game'] }}</td>
-            </tr>
-            <tr>
-                <td>Turnovers per Game (TOV/G)</td>
-                <td>{{ stats[player1_name]['Turnovers Per Game'] }}</td>
-                <td>{{ stats[player2_name]['Turnovers Per Game'] }}</td>
-            </tr>
-            <tr>
-                <td>Field Goal Percentage (FG%)</td>
-                <td>{{ stats[player1_name]['Field Goal Percentage'] }}%</td>
-                <td>{{ stats[player2_name]['Field Goal Percentage'] }}%</td>
-            </tr>
-            <tr>
-                <td>Three-Point Percentage (3P%)</td>
-                <td>{{ stats[player1_name]['Three-Point Percentage'] }}%</td>
-                <td>{{ stats[player2_name]['Three-Point Percentage'] }}%</td>
-            </tr>
-            <tr>
-                <td>Free Throw Percentage (FT%)</td>
-                <td>{{ stats[player1_name]['Free Throw Percentage'] }}%</td>
-                <td>{{ stats[player2_name]['Free Throw Percentage'] }}%</td>
-            </tr>
-        </table>
+        <h1>Compare Basic Stats</h1>
 
-        <a href="{{ url_for('main.index') }}" class="btn">Back to Home</a>
+        {% if stats %}
+            <table class="stats-table">
+                <tr>
+                    <th>Stat</th>
+                    <th>{{ player1_name }}</th>
+                    <th>{{ player2_name }}</th>
+                </tr>
+                <tr>
+                    <td>Games Played (G)</td>
+                    <td>{{ stats[player1_name]['GP'] }}</td>
+                    <td>{{ stats[player2_name]['GP'] }}</td>
+                </tr>
+                <tr>
+                    <td>Points per Game (PTS/G)</td>
+                    <td>{{ stats[player1_name]['Points Per Game'] }}</td>
+                    <td>{{ stats[player2_name]['Points Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Rebounds per Game (TRB/G)</td>
+                    <td>{{ stats[player1_name]['Rebounds Per Game'] }}</td>
+                    <td>{{ stats[player2_name]['Rebounds Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Assists per Game (AST/G)</td>
+                    <td>{{ stats[player1_name]['Assists Per Game'] }}</td>
+                    <td>{{ stats[player2_name]['Assists Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Steals per Game (STL/G)</td>
+                    <td>{{ stats[player1_name]['Steals Per Game'] }}</td>
+                    <td>{{ stats[player2_name]['Steals Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Blocks per Game (BLK/G)</td>
+                    <td>{{ stats[player1_name]['Blocks Per Game'] }}</td>
+                    <td>{{ stats[player2_name]['Blocks Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Turnovers per Game (TOV/G)</td>
+                    <td>{{ stats[player1_name]['Turnovers Per Game'] }}</td>
+                    <td>{{ stats[player2_name]['Turnovers Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Field Goal Percentage (FG%)</td>
+                    <td>{{ stats[player1_name]['Field Goal Percentage'] }}%</td>
+                    <td>{{ stats[player2_name]['Field Goal Percentage'] }}%</td>
+                </tr>
+                <tr>
+                    <td>Three-Point Percentage (3P%)</td>
+                    <td>{{ stats[player1_name]['Three-Point Percentage'] }}%</td>
+                    <td>{{ stats[player2_name]['Three-Point Percentage'] }}%</td>
+                </tr>
+                <tr>
+                    <td>Free Throw Percentage (FT%)</td>
+                    <td>{{ stats[player1_name]['Free Throw Percentage'] }}%</td>
+                    <td>{{ stats[player2_name]['Free Throw Percentage'] }}%</td>
+                </tr>
+            </table>
+        {% else %}
+            <p>No data available for the specified players.</p>
+        {% endif %}
+    <form action="{{ url_for('main.index') }}" method="post">
+            <button type="submit" class="btn">Back to Home</button>
+        </form>
     </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

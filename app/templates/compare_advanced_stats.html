@@ -8,44 +8,43 @@
 </head>
 <body>
     <div class="container">
-        <div class="comparison">
-            <div class="player">
-                <h2>{{ player1_name }}</h2>
-            </div>
-            <div class="player">
-                <h2>{{ player2_name }}</h2>
-            </div>
-        </div>
+        <h1>Compare Advanced Stats</h1>
         
-        <table class="stats-table">
-            <tr>
-                <th>Advanced Stats</th>
-                <th>{{ player1_name }}</th>
-                <th>{{ player2_name }}</th>
-            </tr>
-            <tr>
-                <td>Player Efficiency Rating (PER)</td>
-                <td>{{ stats[player1_name]['Player Efficiency Rating'] }}</td>
-                <td>{{ stats[player2_name]['Player Efficiency Rating'] }}</td>
-            </tr>
-            <tr>
-                <td>True Shooting Percentage (TS%)</td>
-                <td>{{ stats[player1_name]['True Shooting Percentage'] }}%</td>
-                <td>{{ stats[player2_name]['True Shooting Percentage'] }}%</td>
-            </tr>
-            <tr>
-                <td>Box Plus/Minus (BPM)</td>
-                <td>{{ stats[player1_name]['Box Plus/Minus'] }}</td>
-                <td>{{ stats[player2_name]['Box Plus/Minus'] }}</td>
-            </tr>
-            <tr>
-                <td>Value Over Replacement Player (VORP)</td>
-                <td>{{ stats[player1_name]['Value Over Replacement Player'] }}</td>
-                <td>{{ stats[player2_name]['Value Over Replacement Player'] }}</td>
-            </tr>
-        </table>
-
-        <a href="{{ url_for('main.index') }}" class="btn">Back to Home</a>
+        {% if stats %}
+            <table class="stats-table">
+                <tr>
+                    <th>Stat</th>
+                    <th>{{ player1_name }}</th>
+                    <th>{{ player2_name }}</th>
+                </tr>
+                <tr>
+                    <td>Player Efficiency Rating (PER)</td>
+                    <td>{{ stats[player1_name]['Player Efficiency Rating'] }}</td>
+                    <td>{{ stats[player2_name]['Player Efficiency Rating'] }}</td>
+                </tr>
+                <tr>
+                    <td>True Shooting Percentage (TS%)</td>
+                    <td>{{ stats[player1_name]['True Shooting Percentage'] }}%</td>
+                    <td>{{ stats[player2_name]['True Shooting Percentage'] }}%</td>
+                </tr>
+                <tr>
+                    <td>Box Plus/Minus (BPM)</td>
+                    <td>{{ stats[player1_name]['Box Plus/Minus'] }}</td>
+                    <td>{{ stats[player2_name]['Box Plus/Minus'] }}</td>
+                </tr>
+                <tr>
+                    <td>Value Over Replacement Player (VORP)</td>
+                    <td>{{ stats[player1_name]['Value Over Replacement Player'] }}</td>
+                    <td>{{ stats[player2_name]['Value Over Replacement Player'] }}</td>
+                </tr>
+            </table>
+        {% else %}
+            <p>No data available for the specified players.</p>
+        {% endif %}
+<form action="{{ url_for('main.index') }}" method="post">
+            <button type="submit" class="btn">Back to Home</button>
+        </form>
     </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

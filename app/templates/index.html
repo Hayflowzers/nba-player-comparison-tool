@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Stats</title>
+    <title>Welcome to Player Stats</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Welcome to Player Stats</h1>
-    <div>
-        <a href="{{ url_for('main.one_player') }}" class="btn">One Player</a>
-        <a href="{{ url_for('main.two_players') }}" class="btn">Two Players</a>
+    <div class="container">
+        <h1>Welcome to Player Stats</h1>
+        <div>
+            <!-- Form to navigate to the One Player page -->
+            <form action="{{ url_for('main.one_player') }}" method="post">
+                <button type="submit" class="btn">One Player</button>
+            </form>
+
+            <!-- Form to navigate to the Two Players page -->
+            <form action="{{ url_for('main.two_players') }}" method="post">
+                <button type="submit" class="btn">Two Players</button>
+            </form>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>

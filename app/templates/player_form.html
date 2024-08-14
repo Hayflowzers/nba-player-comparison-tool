@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>One Player Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>One Player Stats</h1>
-
-    <!-- Form for Basic Stats -->
-    <form action="{{ url_for('main.player_basic_stats') }}" method="post">
-        <label for="player_name">Enter Player Name for Basic Stats:</label>
-        <input type="text" id="player_name" name="player_name" placeholder="Enter Player Name" required>
-        <input type="submit" value="Get Basic Stats">
-    </form>
-
-    <!-- Form for Advanced Stats -->
-    <form action="{{ url_for('main.player_advanced_stats') }}" method="post">
-        <label for="player_name_advanced">Enter Player Name for Advanced Stats:</label>
-        <input type="text" id="player_name_advanced" name="player_name" placeholder="Enter Player Name" required>
-        <input type="submit" value="Get Advanced Stats">
-    </form>
-
+    <div class="container">
+        <h1>One Player Stats for {{ player_name }}</h1>
+        <form action="{{ url_for('main.player_basic_stats') }}" method="post">
+            <input type="hidden" name="player_name" value="{{ player_name }}">
+            <input type="submit" value="Basic Stats" class="btn">
+        </form>
+        <form action="{{ url_for('main.player_advanced_stats') }}" method="post">
+            <input type="hidden" name="player_name" value="{{ player_name }}">
+            <input type="submit" value="Advanced Stats" class="btn">
+        </form>
+        <form action="{{ url_for('main.index') }}" method="post">
+            <button type="submit" class="btn">Back to Home</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

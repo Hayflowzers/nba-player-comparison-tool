@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Enter Player Name</h1>
 
-        <form action="{{ url_for('main.one_player_stats') }}" method="post">
+        <form action="{{ url_for('main.one_player') }}" method="post">
             <input type="text" name="player_name" placeholder="Enter Player Name" class="form-control" required>
             <input type="submit" value="Next" class="btn">
         </form>

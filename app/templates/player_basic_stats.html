@@ -4,21 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Basic Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Player Basic Stats</h1>
+    <div class="container">
+        <h1>Player Basic Stats</h1>
 
-    {% if stats %}
-        <p>Player: {{ player_name }}</p>
-        <p>Points per Game: {{ stats['Points Per Game'] }}</p>
-        <p>Assists per Game: {{ stats['Assists Per Game'] }}</p>
-        <p>Rebounds per Game: {{ stats['Rebounds Per Game'] }}</p>
-    {% else %}
-        <p>No data available for the specified player.</p>
-    {% endif %}
-
-    <!-- Button to search again -->
-    <a href="{{ url_for('main.one_player') }}" class="btn">Search Again</a>
-    <a href="{{ url_for('main.index') }}" class="btn">Back to Home</a>
+        {% if stats %}
+            <table class="stats-table">
+                <tr>
+                    <th>Stat</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Games Played (G)</td>
+                    <td>{{ stats['GP'] }}</td>
+                </tr>
+                <tr>
+                    <td>Points per Game (PTS/G)</td>
+                    <td>{{ stats['Points Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Rebounds per Game (TRB/G)</td>
+                    <td>{{ stats['Rebounds Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Assists per Game (AST/G)</td>
+                    <td>{{ stats['Assists Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Steals per Game (STL/G)</td>
+                    <td>{{ stats['Steals Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Blocks per Game (BLK/G)</td>
+                    <td>{{ stats['Blocks Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Turnovers per Game (TOV/G)</td>
+                    <td>{{ stats['Turnovers Per Game'] }}</td>
+                </tr>
+                <tr>
+                    <td>Field Goal Percentage (FG%)</td>
+                    <td>{{ stats['Field Goal Percentage'] }}%</td>
+                </tr>
+                <tr>
+                    <td>Three-Point Percentage (3P%)</td>
+                    <td>{{ stats['Three-Point Percentage'] }}%</td>
+                </tr>
+                <tr>
+                    <td>Free Throw Percentage (FT%)</td>
+                    <td>{{ stats['Free Throw Percentage'] }}%</td>
+                </tr>
+            </table>
+        {% else %}
+            <p>No data available for the specified player.</p>
+        {% endif %}
+        <form action="{{ url_for('main.index') }}" method="post">
+            <button type="submit" class="btn">Back to Home</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

@@ -4,27 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compare Two Players</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Compare Two Players</h1>
-
-    <!-- Form for Basic Stats Comparison -->
-    <form action="{{ url_for('main.compare_basic_stats') }}" method="post">
-        <label for="player1_name">Enter First Player Name for Basic Stats:</label>
-        <input type="text" id="player1_name" name="player1_name" placeholder="Enter First Player Name" required>
-        <label for="player2_name">Enter Second Player Name for Basic Stats:</label>
-        <input type="text" id="player2_name" name="player2_name" placeholder="Enter Second Player Name" required>
-        <input type="submit" value="Compare Basic Stats">
-    </form>
-
-    <!-- Form for Advanced Stats Comparison -->
-    <form action="{{ url_for('main.compare_advanced_stats') }}" method="post">
-        <label for="player1_name_advanced">Enter First Player Name for Advanced Stats:</label>
-        <input type="text" id="player1_name_advanced" name="player1_name" placeholder="Enter First Player Name" required>
-        <label for="player2_name_advanced">Enter Second Player Name for Advanced Stats:</label>
-        <input type="text" id="player2_name_advanced" name="player2_name" placeholder="Enter Second Player Name" required>
-        <input type="submit" value="Compare Advanced Stats">
-    </form>
-
+    <div class="container">
+        <h1>Compare Stats for {{ player1_name }} and {{ player2_name }}</h1>
+        <form action="{{ url_for('main.compare_basic_stats') }}" method="get">
+            <input type="hidden" name="player1_name" value="{{ player1_name }}">
+            <input type="hidden" name="player2_name" value="{{ player2_name }}">
+            <input type="submit" value="Basic Stats" class="btn">
+        </form>
+        <form action="{{ url_for('main.compare_advanced_stats') }}" method="get">
+            <input type="hidden" name="player1_name" value="{{ player1_name }}">
+            <input type="hidden" name="player2_name" value="{{ player2_name }}">
+            <input type="submit" value="Advanced Stats" class="btn">
+        </form>
+        <form action="{{ url_for('main.index') }}" method="post">
+            <button type="submit" class="btn">Back to Home</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

@@ -1,2 +1,3 @@
 Flask==2.2.2
 pandas==2.1.0
+nba_api repository
