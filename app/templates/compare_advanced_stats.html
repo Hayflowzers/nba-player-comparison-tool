@@ -4,24 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compare Advanced Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Compare Advanced Stats</h1>
+    <div class="container">
+        <div class="comparison">
+            <div class="player">
+                <h2>{{ player1_name }}</h2>
+            </div>
+            <div class="player">
+                <h2>{{ player2_name }}</h2>
+            </div>
+        </div>
+        
+        <table class="stats-table">
+            <tr>
+                <th>Advanced Stats</th>
+                <th>{{ player1_name }}</th>
+                <th>{{ player2_name }}</th>
+            </tr>
+            <tr>
+                <td>Player Efficiency Rating (PER)</td>
+                <td>{{ stats[player1_name]['Player Efficiency Rating'] }}</td>
+                <td>{{ stats[player2_name]['Player Efficiency Rating'] }}</td>
+            </tr>
+            <tr>
+                <td>True Shooting Percentage (TS%)</td>
+                <td>{{ stats[player1_name]['True Shooting Percentage'] }}%</td>
+                <td>{{ stats[player2_name]['True Shooting Percentage'] }}%</td>
+            </tr>
+            <tr>
+                <td>Box Plus/Minus (BPM)</td>
+                <td>{{ stats[player1_name]['Box Plus/Minus'] }}</td>
+                <td>{{ stats[player2_name]['Box Plus/Minus'] }}</td>
+            </tr>
+            <tr>
+                <td>Value Over Replacement Player (VORP)</td>
+                <td>{{ stats[player1_name]['Value Over Replacement Player'] }}</td>
+                <td>{{ stats[player2_name]['Value Over Replacement Player'] }}</td>
+            </tr>
+        </table>
 
-    {% if stats %}
-        <h2>Player 1: {{ player1_name }}</h2>
-        <p>Player Efficiency Rating (PER): {{ stats[player1_name]['Player Efficiency Rating'] }}</p>
-        <p>True Shooting Percentage (TS%): {{ stats[player1_name]['True Shooting Percentage'] }}</p>
-
-        <h2>Player 2: {{ player2_name }}</h2>
-        <p>Player Efficiency Rating (PER): {{ stats[player2_name]['Player Efficiency Rating'] }}</p>
-        <p>True Shooting Percentage (TS%): {{ stats[player2_name]['True Shooting Percentage'] }}</p>
-    {% else %}
-        <p>No data available for the specified players.</p>
-    {% endif %}
-
-    <!-- Button to search again -->
-    <a href="{{ url_for('main.two_players') }}" class="btn">Search Again</a>
-    <a href="{{ url_for('main.index') }}" class="btn">Back to Home</a>
+        <a href="{{ url_for('main.index') }}" class="btn">Back to Home</a>
+    </div>
 </body>
 </html>

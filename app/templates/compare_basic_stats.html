@@ -4,26 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compare Basic Stats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Compare Basic Stats</h1>
+    <div class="container">
+        <div class="comparison">
+            <div class="player">
+                <h2>{{ player1_name }}</h2>
+            </div>
+            <div class="player">
+                <h2>{{ player2_name }}</h2>
+            </div>
+        </div>
+        
+        <table class="stats-table">
+            <tr>
+                <th>Overall Stats</th>
+                <th>{{ player1_name }}</th>
+                <th>{{ player2_name }}</th>
+            </tr>
+            <tr>
+                <td>Games Played (G)</td>
+                <td>{{ stats[player1_name]['GP'] }}</td>
+                <td>{{ stats[player2_name]['GP'] }}</td>
+            </tr>
+            <tr>
+                <td>Points per Game (PTS/G)</td>
+                <td>{{ stats[player1_name]['Points Per Game'] }}</td>
+                <td>{{ stats[player2_name]['Points Per Game'] }}</td>
+            </tr>
+            <tr>
+                <td>Rebounds per Game (TRB/G)</td>
+                <td>{{ stats[player1_name]['Rebounds Per Game'] }}</td>
+                <td>{{ stats[player2_name]['Rebounds Per Game'] }}</td>
+            </tr>
+            <tr>
+                <td>Assists per Game (AST/G)</td>
+                <td>{{ stats[player1_name]['Assists Per Game'] }}</td>
+                <td>{{ stats[player2_name]['Assists Per Game'] }}</td>
+            </tr>
+            <tr>
+                <td>Steals per Game (STL/G)</td>
+                <td>{{ stats[player1_name]['Steals Per Game'] }}</td>
+                <td>{{ stats[player2_name]['Steals Per Game'] }}</td>
+            </tr>
+            <tr>
+                <td>Blocks per Game (BLK/G)</td>
+                <td>{{ stats[player1_name]['Blocks Per Game'] }}</td>
+                <td>{{ stats[player2_name]['Blocks Per Game'] }}</td>
+            </tr>
+            <tr>
+                <td>Turnovers per Game (TOV/G)</td>
+                <td>{{ stats[player1_name]['Turnovers Per Game'] }}</td>
+                <td>{{ stats[player2_name]['Turnovers Per Game'] }}</td>
+            </tr>
+            <tr>
+                <td>Field Goal Percentage (FG%)</td>
+                <td>{{ stats[player1_name]['Field Goal Percentage'] }}%</td>
+                <td>{{ stats[player2_name]['Field Goal Percentage'] }}%</td>
+            </tr>
+            <tr>
+                <td>Three-Point Percentage (3P%)</td>
+                <td>{{ stats[player1_name]['Three-Point Percentage'] }}%</td>
+                <td>{{ stats[player2_name]['Three-Point Percentage'] }}%</td>
+            </tr>
+            <tr>
+                <td>Free Throw Percentage (FT%)</td>
+                <td>{{ stats[player1_name]['Free Throw Percentage'] }}%</td>
+                <td>{{ stats[player2_name]['Free Throw Percentage'] }}%</td>
+            </tr>
+        </table>
 
-    {% if stats %}
-        <h2>Player 1: {{ player1_name }}</h2>
-        <p>Points per Game: {{ stats[player1_name]['Points Per Game'] }}</p>
-        <p>Assists per Game: {{ stats[player1_name]['Assists Per Game'] }}</p>
-        <p>Rebounds per Game: {{ stats[player1_name]['Rebounds Per Game'] }}</p>
-
-        <h2>Player 2: {{ player2_name }}</h2>
-        <p>Points per Game: {{ stats[player2_name]['Points Per Game'] }}</p>
-        <p>Assists per Game: {{ stats[player2_name]['Assists Per Game'] }}</p>
-        <p>Rebounds per Game: {{ stats[player2_name]['Rebounds Per Game'] }}</p>
-    {% else %}
-        <p>No data available for the specified players.</p>
-    {% endif %}
-
-    <!-- Button to search again -->
-    <a href="{{ url_for('main.two_players') }}" class="btn">Search Again</a>
-    <a href="{{ url_for('main.index') }}" class="btn">Back to Home</a>
+        <a href="{{ url_for('main.index') }}" class="btn">Back to Home</a>
+    </div>
 </body>
 </html>
