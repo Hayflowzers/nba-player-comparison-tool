@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compare Advanced Stats</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .container {
+            max-width: 100%;
+            overflow-x: auto;
+            padding: 20px;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .stats-table th, .stats-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 12px;  /* Reduced font size */
+            text-align: center;
+            white-space: nowrap;  /* Prevent text wrapping */
+        }
+        .stats-table th {
+            background-color: #4CAF50;  /* Background color for header */
+            color: white;  /* Text color for header */
+            font-weight: bold;  /* Bold text for header */
+            padding: 12px;  /* Increased padding for header */
+        }
+        .stats-table td {
+            padding: 8px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -12,36 +39,76 @@
         
         {% if stats %}
             <table class="stats-table">
-                <tr>
-                    <th>Stat</th>
-                    <th>{{ player1_name }}</th>
-                    <th>{{ player2_name }}</th>
-                </tr>
-                <tr>
-                    <td>Player Efficiency Rating (PER)</td>
-                    <td>{{ stats[player1_name]['Player Efficiency Rating'] }}</td>
-                    <td>{{ stats[player2_name]['Player Efficiency Rating'] }}</td>
-                </tr>
-                <tr>
-                    <td>True Shooting Percentage (TS%)</td>
-                    <td>{{ stats[player1_name]['True Shooting Percentage'] }}%</td>
-                    <td>{{ stats[player2_name]['True Shooting Percentage'] }}%</td>
-                </tr>
-                <tr>
-                    <td>Box Plus/Minus (BPM)</td>
-                    <td>{{ stats[player1_name]['Box Plus/Minus'] }}</td>
-                    <td>{{ stats[player2_name]['Box Plus/Minus'] }}</td>
-                </tr>
-                <tr>
-                    <td>Value Over Replacement Player (VORP)</td>
-                    <td>{{ stats[player1_name]['Value Over Replacement Player'] }}</td>
-                    <td>{{ stats[player2_name]['Value Over Replacement Player'] }}</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Stat Type</th>
+                        <th>{{ player1_name }} - FGA Frequency</th>
+                        <th>{{ player1_name }} - FGM</th>
+                        <th>{{ player1_name }} - FGA</th>
+                        <th>{{ player1_name }} - FG%</th>
+                        <th>{{ player1_name }} - EFG%</th>
+                        <th>{{ player1_name }} - FG2A Frequency</th>
+                        <th>{{ player1_name }} - FG2M</th>
+                        <th>{{ player1_name }} - FG2A</th>
+                        <th>{{ player1_name }} - FG2%</th>
+                        <th>{{ player1_name }} - FG3A Frequency</th>
+                        <th>{{ player1_name }} - FG3M</th>
+                        <th>{{ player1_name }} - FG3A</th>
+                        <th>{{ player1_name }} - FG3%</th>
+                        <th>{{ player2_name }} - FGA Frequency</th>
+                        <th>{{ player2_name }} - FGM</th>
+                        <th>{{ player2_name }} - FGA</th>
+                        <th>{{ player2_name }} - FG%</th>
+                        <th>{{ player2_name }} - EFG%</th>
+                        <th>{{ player2_name }} - FG2A Frequency</th>
+                        <th>{{ player2_name }} - FG2M</th>
+                        <th>{{ player2_name }} - FG2A</th>
+                        <th>{{ player2_name }} - FG2%</th>
+                        <th>{{ player2_name }} - FG3A Frequency</th>
+                        <th>{{ player2_name }} - FG3M</th>
+                        <th>{{ player2_name }} - FG3A</th>
+                        <th>{{ player2_name }} - FG3%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(stats[player1_name]|length) %}
+                    <tr>
+                        <td>{{ stats[player1_name][i]['SHOT_TYPE'] }}</td>
+                        <td>{{ stats[player1_name][i]['FGA_FREQUENCY'] }}</td>
+                        <td>{{ stats[player1_name][i]['FGM'] }}</td>
+                        <td>{{ stats[player1_name][i]['FGA'] }}</td>
+                        <td>{{ stats[player1_name][i]['FG_PCT'] }}%</td>
+                        <td>{{ stats[player1_name][i]['EFG_PCT'] }}%</td>
+                        <td>{{ stats[player1_name][i]['FG2A_FREQUENCY'] }}</td>
+                        <td>{{ stats[player1_name][i]['FG2M'] }}</td>
+                        <td>{{ stats[player1_name][i]['FG2A'] }}</td>
+                        <td>{{ stats[player1_name][i]['FG2_PCT'] }}%</td>
+                        <td>{{ stats[player1_name][i]['FG3A_FREQUENCY'] }}</td>
+                        <td>{{ stats[player1_name][i]['FG3M'] }}</td>
+                        <td>{{ stats[player1_name][i]['FG3A'] }}</td>
+                        <td>{{ stats[player1_name][i]['FG3_PCT'] }}%</td>
+                        <td>{{ stats[player2_name][i]['FGA_FREQUENCY'] }}</td>
+                        <td>{{ stats[player2_name][i]['FGM'] }}</td>
+                        <td>{{ stats[player2_name][i]['FGA'] }}</td>
+                        <td>{{ stats[player2_name][i]['FG_PCT'] }}%</td>
+                        <td>{{ stats[player2_name][i]['EFG_PCT'] }}%</td>
+                        <td>{{ stats[player2_name][i]['FG2A_FREQUENCY'] }}</td>
+                        <td>{{ stats[player2_name][i]['FG2M'] }}</td>
+                        <td>{{ stats[player2_name][i]['FG2A'] }}</td>
+                        <td>{{ stats[player2_name][i]['FG2_PCT'] }}%</td>
+                        <td>{{ stats[player2_name][i]['FG3A_FREQUENCY'] }}</td>
+                        <td>{{ stats[player2_name][i]['FG3M'] }}</td>
+                        <td>{{ stats[player2_name][i]['FG3A'] }}</td>
+                        <td>{{ stats[player2_name][i]['FG3_PCT'] }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         {% else %}
             <p>No data available for the specified players.</p>
         {% endif %}
-<form action="{{ url_for('main.index') }}" method="post">
+
+        <form action="{{ url_for('main.index') }}" method="get">
             <button type="submit" class="btn">Back to Home</button>
         </form>
     </div>

@@ -5,38 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Advanced Stats</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .container {
+            max-width: 100%;
+            overflow-x: auto;
+            padding: 20px;
+        }
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .stats-table th, .stats-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 12px;  /* Reduced font size */
+            text-align: center;
+            white-space: nowrap;  /* Prevent text wrapping */
+        }
+        .stats-table th {
+            background-color: #4CAF50;  /* Background color for header */
+            color: white;  /* Text color for header */
+            font-weight: bold;  /* Bold text for header */
+            padding: 12px;  /* Increased padding for header */
+        }
+        .stats-table td {
+            padding: 8px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Player Advanced Stats</h1>
+        <h1>Advanced Stats for {{ player_name }}</h1>
 
         {% if stats %}
             <table class="stats-table">
-                <tr>
-                    <th>Stat</th>
-                    <th>Value</th>
-                </tr>
-                <tr>
-                    <td>Player Efficiency Rating (PER)</td>
-                    <td>{{ stats['Player Efficiency Rating'] }}</td>
-                </tr>
-                <tr>
-                    <td>True Shooting Percentage (TS%)</td>
-                    <td>{{ stats['True Shooting Percentage'] }}%</td>
-                </tr>
-                <tr>
-                    <td>Box Plus/Minus (BPM)</td>
-                    <td>{{ stats['Box Plus/Minus'] }}</td>
-                </tr>
-                <tr>
-                    <td>Value Over Replacement Player (VORP)</td>
-                    <td>{{ stats['Value Over Replacement Player'] }}</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Stat Type</th>
+                        <th>FGA Frequency</th>
+                        <th>FGM</th>
+                        <th>FGA</th>
+                        <th>FG%</th>
+                        <th>EFG%</th>
+                        <th>FG2A Frequency</th>
+                        <th>FG2M</th>
+                        <th>FG2A</th>
+                        <th>FG2%</th>
+                        <th>FG3A Frequency</th>
+                        <th>FG3M</th>
+                        <th>FG3A</th>
+                        <th>FG3%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in stats %}
+                    <tr>
+                        <td>{{ stat['SHOT_TYPE'] }}</td>
+                        <td>{{ stat['FGA_FREQUENCY'] }}</td>
+                        <td>{{ stat['FGM'] }}</td>
+                        <td>{{ stat['FGA'] }}</td>
+                        <td>{{ stat['FG_PCT'] }}%</td>
+                        <td>{{ stat['EFG_PCT'] }}%</td>
+                        <td>{{ stat['FG2A_FREQUENCY'] }}</td>
+                        <td>{{ stat['FG2M'] }}</td>
+                        <td>{{ stat['FG2A'] }}</td>
+                        <td>{{ stat['FG2_PCT'] }}%</td>
+                        <td>{{ stat['FG3A_FREQUENCY'] }}</td>
+                        <td>{{ stat['FG3M'] }}</td>
+                        <td>{{ stat['FG3A'] }}</td>
+                        <td>{{ stat['FG3_PCT'] }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         {% else %}
-            <p>No data available for the specified player.</p>
+            <p>No data available for {{ player_name }}.</p>
         {% endif %}
-  <form action="{{ url_for('main.index') }}" method="post">
+
+        <form action="{{ url_for('main.index') }}" method="get">
             <button type="submit" class="btn">Back to Home</button>
         </form>
     </div>

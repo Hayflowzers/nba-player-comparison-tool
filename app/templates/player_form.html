@@ -17,7 +17,7 @@
             <input type="hidden" name="player_name" value="{{ player_name }}">
             <input type="submit" value="Advanced Stats" class="btn">
         </form>
-        <form action="{{ url_for('main.index') }}" method="post">
+        <form action="{{ url_for('main.index') }}" method="get">
             <button type="submit" class="btn">Back to Home</button>
         </form>
     </div>

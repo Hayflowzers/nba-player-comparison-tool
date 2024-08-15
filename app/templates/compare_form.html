@@ -9,17 +9,17 @@
 <body>
     <div class="container">
         <h1>Compare Stats for {{ player1_name }} and {{ player2_name }}</h1>
-        <form action="{{ url_for('main.compare_basic_stats') }}" method="get">
+        <form action="{{ url_for('main.compare_basic_stats') }}" method="post">
             <input type="hidden" name="player1_name" value="{{ player1_name }}">
             <input type="hidden" name="player2_name" value="{{ player2_name }}">
             <input type="submit" value="Basic Stats" class="btn">
         </form>
-        <form action="{{ url_for('main.compare_advanced_stats') }}" method="get">
+        <form action="{{ url_for('main.compare_advanced_stats') }}" method="post">
             <input type="hidden" name="player1_name" value="{{ player1_name }}">
             <input type="hidden" name="player2_name" value="{{ player2_name }}">
             <input type="submit" value="Advanced Stats" class="btn">
         </form>
-        <form action="{{ url_for('main.index') }}" method="post">
+        <form action="{{ url_for('main.index') }}" method="get">
             <button type="submit" class="btn">Back to Home</button>
         </form>
     </div>

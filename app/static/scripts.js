@@ -46,18 +46,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-// Function to add row highlighting on hover
-function addRowHoverEffect() {
-    document.querySelectorAll('.stats-table tr').forEach(function(row) {
-        row.addEventListener('mouseover', function() {
-            row.style.backgroundColor = '#e9ecef';
-        });
-
-        row.addEventListener('mouseout', function() {
-            row.style.backgroundColor = '';
-        });
-    });
-}
-
-// Call the function to apply hover effect
-addRowHoverEffect();
