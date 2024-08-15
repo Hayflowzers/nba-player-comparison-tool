@@ -51,11 +51,13 @@ Libraries:
 Technologies:
   HTML/CSS: For building the web pages and styling.
   JavaScript: For client-side interactions and dynamic updates.
+  python: for data acquistion
 Rationale:
   Flask provides a lightweight and easy-to-use framework for web development, while nba_api offers a robust source for retrieving NBA statistics. Using these technologies supports the goal of creating a functional and user-friendly comparison tool.
 
 ## System or Software Architecture Diagram
-*Include a block-based diagram illustrating the architecture of your software or system. This should include major components, such as user interface elements, back-end services, and data storage, and show how they interact. Tools like Lucidchart, Draw.io, or even hand-drawn diagrams photographed and uploaded are acceptable. The purpose of the diagram is to help us understand the architecture of your solution. Diagram asthetics do not matter and will not be graded.*
+![Screenshot 2024-08-09 230008](https://github.com/user-attachments/assets/f9628d29-d148-43f0-8364-c3143264d434)
+
 
 ## Development Methodology
 GitHub Projects Board: Track progress on tasks and milestones.
@@ -75,7 +77,7 @@ Challenge: Designing a user-friendly interface.
 Solution: Iterate on design with user feedback and testing.
 
 ## Additional Resources
-*Include any additional resources, tutorials, or documentation that will be helpful for this project.*
-
+https://stathead.com/basketball/
 ## Conclusion and Future Work
-The project aims to create a comprehensive tool for comparing NBA players based on various statistics. Future work could involve expanding the feature set to include historical data, player comparisons over time, or integration with other data sources. Additionally, improvements to the UI/UX and incorporating user feedback will enhance the overall experience.
+The project aims to create a comprehensive tool for comparing NBA players based on various statistics. Future work could involve expanding the feature set to include historical data, player comparisons over time, or integration with other data sources. Additionally, improvements to the UI/UX and incorporating user feedback will enhance the overall experience. Moreover, this project taught me how to use a variety of data strucutres, and how to analayze data from a large dataset 
+
