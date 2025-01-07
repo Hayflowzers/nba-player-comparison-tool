@@ -1,3 +1,4 @@
 Flask
 pandas
 git+https://github.com/swar/nba_api.git
+gunicorn==20.1.0
